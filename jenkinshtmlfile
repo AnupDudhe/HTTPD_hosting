@@ -1,0 +1,28 @@
+pipeline {
+    agent any 
+    stages {
+        stage('extract') { 
+            steps {
+                 sh 'sudo -i'
+                 sh 'apt-get update -y'
+                 sh 'apt install apache2 -y' 
+                 sh 'curl -O /var/www/html/https://www.free-css.com/assets/files/free-css-templates/download/page296/oxer.zip'
+                 
+            }
+        }
+        stage('installzip') { 
+            steps {
+                
+                  sudo apt install unzip -y
+                  sudo unzip /var/www/html/oxer.zip
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                  sudo systemctl start apache2
+                  sudo rm -rf
+            }
+        }
+    }
+}
+
